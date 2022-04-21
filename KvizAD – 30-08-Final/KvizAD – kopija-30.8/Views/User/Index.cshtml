@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewData["Title"] = "User";
+}
+<style>
+    body {
+        color: #6B6B6B;
+        color: black;
+        background-color: #F2F2F2;
+        word-wrap: break-word;
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1.7;
+        font-size: 14px;
+    }
+
+    .btn {
+        float: right;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 13px;
+        padding: 12px 20px;
+        border-radius: 4px;
+        background-color: #DA4453;
+        color: #fff;
+        -webkit-transition: background-color 0.3s linear;
+        -moz-transition: background-color 0.3s linear;
+        -o-transition: background-color 0.3s linear;
+        transition: background-color 0.3s linear;
+    }
+
+    #div1 {
+        /*opacity: 0.6;*/
+        height: 352px;
+        font-size: 18px;
+        font-weight: 400;
+        font-weight:bold;
+    }
+
+  
+   
+    .score {
+        margin-top:10px;
+        margin-left:15px;
+        font-weight: bold;
+        text-align: left;
+        float: left;
+    
+    }
+    #next {
+        
+        margin-right: 35px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: right;
+        float: right;
+    }
+
+    div.transbox {
+        margin: 40px;
+        margin-bottom:6px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.7;
+    }
+</style>
+<!--<h1>Index style="background-color:rebeccapurple;</h1>-->
+<div id="div1" class="site-section-cover overlay" style="background-image: url('https://www.irishtimes.com/polopoly_fs/1.4121626.1576850603!/image/image.jpg_gen/derivatives/box_620_330/image.jpg');">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            
+            <div class="col-lg-10 text-center">
+                
+                <div class="transbox">
+
+                    <label id="score" class="score">Rezultat: 0</label>
+
+                    <br /> <br />
+                    <label id="pitanje"> </label><br />
+
+                    <input type="radio" id="od_1" name="odgovori" value="0" checked /> <label id="od_1l"></label><br />
+                    <input type="radio" id="od_2" name="odgovori" value="1" /> <label id="od_2l"></label><br />
+                    <input type="radio" id="od_3" name="odgovori" value="2" /> <label id="od_3l"></label><br />
+                    <input type="button" onclick="Odgovori()" class="btn" id="next" value="Next"><br /><br />
+                </div>
+
+             </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var pitanja = [];
+    var odgovori = [];
+    var odgovor;
+
+    function spremiPitanja(data) {
+        console.log(data);
+        pitanja = data;
+
+
+    }
+    function spremiOdg(data) {
+        odgovori = data;
+
+        setTimeout(Ucitaj, 2000);
+
+    }
+    function Ucitaj() {
+
+        if (br == pitanja.length) {
+
+
+            //window.alert("Pobijedili ste ");
+            window.location.href = "../TheEnd/Win";
+            return;
+
+
+
+
+        }
+        if (zivoti == 0) {
+            //window.alert("Izgubili ste");
+            window.location.href = "../TheEnd/Defeat";
+            return;
+
+
+        }
+
+        let pitanje = pitanja[br];// trenutno pitanje
+        odgovor = odgovori.filter(x => x.pitanjaId == pitanje.pitanjaId);
+        if (odgovor.length === 3) {
+            document.getElementById('pitanje').innerHTML = pitanje.text;
+
+            document.getElementById('od_1l').innerHTML = odgovor[0].text;
+            document.getElementById('od_2l').innerHTML = odgovor[1].text;
+            document.getElementById('od_3l').innerHTML = odgovor[2].text;
+
+
+        } 
+        else {
+            br++;
+            Ucitaj();
+        }
+
+        
+
+
+
+
+
+
+    }
+    axios.get('/api/admin/pitanja').then(response => spremiPitanja(response.data));
+    axios.get('/api/admin/odgovori').then(response => spremiOdg(response.data));
+
+    var br = 0;
+    var zivoti = 3;
+    var score = 0;
+    function Odgovori() {
+
+        // provjeravamo je li checkiran neki odgovor. Ako nije value je -1
+        let value = document.getElementById('od_1').checked ? document.getElementById('od_1').value : -1;
+        value = document.getElementById('od_2').checked ? document.getElementById('od_2').value : value;
+        value = document.getElementById('od_3').checked ? document.getElementById('od_3').value : value;
+
+
+        if (value == -1) return; //ništa ne radi
+
+        let labela = document.getElementById('od_1l').innerHTML;
+        console.log(value);
+
+        if (value == "2") document.getElementById('od_2l').innerHTML;
+        if (value == "3") document.getElementById('od_3l').innerHTML;
+
+        console.log("odgovor");
+        console.log(odgovor[value]);
+        console.log(odgovor[value].isCorect);
+
+
+        if (odgovor[value].isCorect) {
+            alert("odgovor je točan");
+            br++;
+            score += 10;
+            document.getElementById('score').innerHTML = "Rezultat: " + score;
+
+        }
+        else {
+            zivoti -= 1;
+            alert("Odgovor je kriv");
+            br++;
+            if (zivoti == 0) {
+               // alert("Game over");
+
+
+            }
+
+
+        }
+
+
+        Ucitaj();
+
+
+
+    }
+
+
+       // if (true) {
+         //   br++;
+           // score += 10;
+
+
+
+       // }
+       // else {
+            //zivoti -= 1;
+           // if (zivoti == 0) {
+
+               // return;
+
+            //}
+
+
+        //}
+
+
+
+</script>

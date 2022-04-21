@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KvizAD.DbModels.Odgovori>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCorect)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pitanja)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCorect)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pitanja.PitanjaId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OdgovoriId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OdgovoriId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OdgovoriId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

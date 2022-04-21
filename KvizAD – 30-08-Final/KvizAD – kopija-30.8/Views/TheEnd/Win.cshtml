@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Win";
+}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    #div1 {
+        font-size: 24px;
+        font-weight: 400;
+        font-weight:bold;
+        height: 330px;
+    }
+   .happy {
+        padding-top: 15%;
+        width: 95%;
+        height: 98%;
+    }
+    .material-icons {
+        font-size: 36px;   
+      
+    }
+    #transbox {
+        margin-top: 20%;
+        padding: 8px;
+        padding-top: 20px;
+        margin-bottom: 5px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.7;
+        height: 10%;
+        width: 250px;
+    }
+   
+     
+    
+</style>
+
+
+
+<div id="div1" class="site-section-cover overlay" style="background-image: url('../images/Background-image.jpg');">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <!-- <label id="score">Rezultat: 0</label>-->
+            <div class="row">
+                <div id="transbox" class="col-md-7 text-center">
+                    <p>
+                        Čestitke !
+                        Kviz ste riješili sa uspješnošću.
+                        <br />
+                        Želite li odigrati ponovo?
+                    </p>
+                    <button id="replay" class="btn btn-link" onclick="window.location.href = '../User/Index';"> <i class="material-icons md-light">replay</i></button>
+                </div>
+                <div class="col-md-5 text-center"><img src="../images/Happyemoji.jpg" class="happy"></div>
+            </div>
+           <!-- <img src="../images/Happyemoji.jpg" class="happy"><br />
+            <div class="col-lg-10 text-center">
+                <p>
+                    Čestitke !
+                    Kviz ste riješili sa uspješnošću.
+                    <br />
+                    Želite li odigrati ponovo?
+                </p>
+                <button id="replay" class="btn btn-link" onclick="window.location.href = '../User/Index';"> <i class="material-icons md-light">replay</i></button>
+
+                <!-- <div class="center">
+        <button onclick="Odgovori()" class="btn">Next</button></div></div>-->
+            
+
+        
+        </div>
+    </div>
+</div>
+

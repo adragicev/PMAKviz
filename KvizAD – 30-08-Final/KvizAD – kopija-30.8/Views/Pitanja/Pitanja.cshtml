@@ -1,0 +1,278 @@
+﻿@model IEnumerable<KvizAD.DbModels.Pitanja>
+
+
+@{
+    ViewData["Title"] = "Pitanja";
+}
+
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+    <link rel="stylesheet" href="css/SignIn.css" />
+
+    <style>
+        import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+        body {
+            background-color: #3e94ec;
+            font-family: "Lato";
+            font-size: 16px;
+            font-weight: 400;
+            text-rendering: optimizeLegibility;
+        }
+
+        div.table-title {
+            display: block;
+            margin: auto;
+            max-width: 700px;
+            padding: 5px;
+            width: 100%;
+        }
+
+
+        /*** Table Styles **/
+
+        .table-fill {
+            background: white;
+            border-radius: 3px;
+            border-collapse: collapse;
+            height: 250px;
+            margin: auto;
+            max-width: 700px;
+            padding: 4px;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            animation: float 5s infinite;
+        }
+
+        th {
+            background-color: rgba(255,255,255,0.2);
+            color: #D5DDE5;
+            background: #0d0d0d; /*pozadina headera*/
+            border-bottom: 2px solid #9ea7af;
+            border-right: 1px solid #343a45;
+            font-size: 21px;
+            font-weight: 100;
+            padding: 22px;
+            text-align: left;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            vertical-align: middle;
+        }
+
+            th:first-child {
+                border-top-left-radius: 3px;
+            }
+
+            th:last-child {
+                border-top-right-radius: 3px;
+                border-right: none;
+            }
+
+        tr {
+            border-top: 1px solid #C1C3D1;
+            border-bottom: 1px solid #C1C3D1;
+            color: #666B85;
+            font-size: 16px;
+            font-weight: normal;
+            text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+        }
+
+            tr:hover td {
+                /* background: #b399ff;*/
+                background: #5c85d6;
+                color: #FFFFFF;
+                border-top: 1px solid #22262e;
+            }
+
+            tr:first-child {
+                border-top: none;
+            }
+
+            tr:last-child {
+                border-bottom: none;
+            }
+
+
+        td {
+            background: #FFFFFF;
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 16px;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #C1C3D1;
+        }
+
+            td:last-child {
+                border-right: 0px;
+            }
+
+        th.text-left {
+            text-align: left;
+        }
+
+        th.text-center {
+            text-align: center;
+        }
+
+        th.text-right {
+            text-align: right;
+        }
+
+        td.text-left {
+            text-align: left;
+        }
+
+        td.text-center {
+            text-align: center;
+        }
+
+        td.text-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-title">
+        <h1> </h1>
+    </div>
+    <div id="myModal" class="modal" style="align-content:center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Uredi pitanje</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <label for="tekstE">Pitanje:</label>
+                <input type="text" id="tekstE" name="textPitanje" /><br />
+
+                <input type="hidden" id="idE" name="pitanjeID" />
+            </div>
+
+            <div class="modal-footer">
+                <button class="myButton" onclick="odustani()">Odustani</button>
+                <input type="button" class="myButton" value="Uredi pitanje" onclick="uredi()" />
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <!-- <th class="text-left">
+                @Html.DisplayNameFor(model => model.PitanjaId)
+                </th> -->
+                <th class="text-left">
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th class="text-left">
+                    Odgovori
+                </th>
+                <th class="text-left">
+                    Opcije
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <!--<td class="text-left">
+                        @Html.DisplayFor(modelItem => item.PitanjaId)
+                    </td> -->
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td class="text-left">
+                        @foreach (var odgovor in item.Odgovori)
+                        {
+                            @odgovor.Text <n /> @odgovor.IsCorect
+                            <span class="badge badge-light"><a asp-controller="Answers" asp-action="Edit" asp-route-id="@odgovor.OdgovoriId">Uredi odg</a></span>
+                            <br />
+                         }
+                    </td>
+                    <td>
+                        @*<span class="badge badge-light" data-PitanjaId="@item.PitanjaId" data-Text="@item.Text" onclick="ucitaj(this)"> Uredi pitanje</span>*@
+                        <br />
+                        <br />
+                        <span class="badge badge-light"><a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.PitanjaId">Uredi pitanje</a></span>
+                        <span class="badge badge-danger" onclick="Delete(@item.PitanjaId)"> Izbriši pitanje </span>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table> <br />
+</body>
+
+
+
+<script>
+    function Delete(id) {
+
+        if (confirm('Jeste li sigurni da želite izbrisati pitanje?')) {
+            //alert("tu sam");
+            console.log(id);
+            axios.delete(`/api/admin/deletepitanje/${id}`);
+            setTimeout(function () { location.reload(true); }, 3000);
+
+        }
+
+    }
+    function odustani() {
+
+        document.getElementById('myModal').style.display = "none";
+
+
+        document.getElementById('tekstE').value = "";
+
+        document.getElementById('idE').value = "";
+
+
+    }
+    function uredi() {
+        //napravi validaciju uređivanja
+        let id = document.getElementById('idE').value;
+        let tekst = document.getElementById('tekstE').value;
+        let azurirani2 = { pitanjeID: id, textPitanje: tekst };
+        var azurirani = JSON.stringify(azurirani2);
+        console.log(azurirani);
+        axios.put(`/api/admin/editpitanje/`,azurirani);
+        //odustani();
+        
+        
+        setTimeout(function () { location.reload(true); }, 2000);
+
+
+
+    }
+    function ucitaj(e) {
+        let id = e.getAttribute("data-PitanjaId")
+        let tekst = e.getAttribute("data-Text");
+
+
+        console.log(id, tekst);
+        document.getElementById('tekstE').value = tekst;
+
+        document.getElementById('idE').value = id;
+
+
+        document.getElementById('myModal').style.display = "block";
+
+
+    }
+
+
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

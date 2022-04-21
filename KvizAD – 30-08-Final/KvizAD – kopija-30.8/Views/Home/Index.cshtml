@@ -1,0 +1,247 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Bilbo Swash Caps' rel='stylesheet'>
+
+    <style>
+        body {
+            color: #6B6B6B;
+            background-color: #F2F2F2;
+            word-wrap: break-word;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        h1, .h1 {
+            color: #DA4453;
+            font-weight: 700;
+            /* font-family: 'Roboto Slab', serif;*/
+            font-family: 'Sofia';
+            font-size: 15px;
+            font-weight: bold;
+            font-size: 3.6em;
+        }
+
+        h2, h3, h4, h5,
+        .h2, .h3, .h4, .h5 {
+            font-weight: 300;
+            /** color:#000;*/
+            color: #1a1a1a;
+        }
+
+
+        h1,
+        .h1 {
+            font-size: 28px;
+        }
+
+        h2,
+        .h2 {
+            font-size: 26px;
+        }
+
+        input {
+            line-height: normal;
+            -webkit-appearance: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        #div1 {
+            height: 330px;
+            padding-top: 6px;
+        }
+
+        .form-control {
+            width: 140px;
+        }
+
+        .center {
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .btn {
+            float: right;
+            margin-top: 130px;
+            text-align: center;
+            font-size: 13px;
+            padding: 13px 15px;
+            border-radius: 4px;
+            background-color: #DA4453;
+            color: #fff;
+            text-transform: uppercase;
+            -webkit-transition: background-color 0.3s linear;
+            -moz-transition: background-color 0.3s linear;
+            -o-transition: background-color 0.3s linear;
+            transition: background-color 0.3s linear;
+        }
+
+            .btn:hover,
+            .btn:focus {
+                background-color: #363636;
+            }
+
+        .links {
+            margin-top: 100px;
+        }
+
+        .spad {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .story {
+            padding-bottom: 40px;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+            .section-title span {
+                font-size: 20px;
+                text-align: left;
+                color: #353535;
+                /*font-family: "Work Sans", sans-serif;*/
+                font-family: "Bilbo Swash Caps";
+                display: inline-block;
+                margin-bottom: 8px;
+            }
+
+            .section-title p {
+                margin-top: 17px;
+                font-size: 27px;
+                font-weight: 400;
+                margin-bottom: 10px;
+                font-family: "Bilbo Swash Caps";
+                color: #353535;
+            }
+
+        .tekst {
+            font-size: 16px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="div1" class="site-section-cover overlay" style="background-image: url('https://www.irishtimes.com/polopoly_fs/1.4121626.1576850603!/image/image.jpg_gen/derivatives/box_620_330/image.jpg');">
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <form method="POST" asp-controller="Authentication" asp-action="LogIn">
+                        <h1 class="display-4"><strong>Kviz znanja</strong></h1> <br /> <br />
+                        <input id="User" type="text" class="form-control center" name="username" placeholder="Username"> <br /> <br />
+                        <input id="Password" type="password" class="form-control center" name="password" placeholder="Password">
+                        <div class="center">
+                            <input type="submit" class="btn" value="Play" />
+                        </div>
+                        <div class="links">
+                            Nemate račun? <a asp-controller="Authentication" asp-action="Registracija">Registrirajte se</a>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="story spad">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-7">
+                    <div class="section-title">
+
+                        <p>
+                            Jedino dobro na svijetu je znanje, a zlo neznanje.
+                        </p>
+
+                        <span>Sokrat</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-12">
+                <div class="tekst">
+
+                    <p>
+                        Na kojoj razini mislite da je Vaše opće znanje? Evo zabavnog načina da saznate!
+                        <strong>
+                            Registrirajte se i odgovorite na pitanja o općem znanju i saznajte koliko ste stvarno znate o svijetu
+                            koji vas okružuje.
+                        </strong> Općenito, kvizovi znanja su odličan način za dobro se provesti i naučiti nešto novo.
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+   <footer class="f">
+    <div class="container">
+        <div class="footer__content">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <h4>O nama</h4>
+                        <p>
+                            Ovaj kviz sadrži gomilu trivijalnih pitanja i odgovora iz različitih kategorija i zabavnih činjenica za svako pojedinačno pitanje na koje odgovarate.
+                            Neki od nas će ovaj kviz općeg znanja smatrati lakim, neki teškim, ali svi ćemo se dobro provoditi s ovim mozgalicom.
+
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-5 offset-md-1 col-sm-6">
+                    <div class="footer__widget">
+                        <h4>Quick Link</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About Us</a></li>
+                            <li><a asp-controller="Authentication" asp-action="Registracija">Registracija</a></li>
+                            <li><a asp-controller="Authentication" asp-action="AdminLogIn">Admin</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <h4>Kontakt</h4>
+                        <ul class="list-unstyled footer-link">
+                            <li class="d-block mb-3">
+                                <span class="d-block text-black">Address:</span>
+                                <span>34 Street Name, Split, Croatia</span>
+                            </li>
+                            <li class="d-block mb-3"><span class="d-block text-black">Phone:</span><span>+1 242 4942 290</span></li>
+                            <li class="d-block mb-3"><span class="d-block text-black">Email:</span><span>info@kvizznanja.com</span></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
